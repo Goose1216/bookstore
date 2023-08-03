@@ -4,6 +4,7 @@
 
 {% block content %}
 <h1>Homepage!</h1>
+<img class="bookcover" src="{% static 'images/dfp_40.jpg' %}">в
 {% if user.is_authenticated %}
     <p>Hi {{ user.username }}!</p>
     <a href = "{% url 'logout' %}">Log out</a>
