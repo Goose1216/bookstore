@@ -1,12 +1,13 @@
-FROM python:3.7-slim
+FROM python:3.10.4-slim-bullseye
 
+ENV PIP_DISABLE_PIP_VERSION_CHEK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 WORKDIR /code
 
-COPY Pipfile Pipfile.lock /code/
-RUN pip install pipenv && pipenv install --system && pip install psycopg2-binary==2.8
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
 
 
-COPY . /code/
+COPY . .
