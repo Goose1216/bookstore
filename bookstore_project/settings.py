@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     'users',
     'pages',
+    'books',
 ]
 
 MIDDLEWARE = [
@@ -150,5 +151,5 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "admin@djangobookstore.com"
