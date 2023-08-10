@@ -1,16 +1,29 @@
 from django.test import TestCase
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from .models import Book
+from .models import Book, Review
 
 class BookTest(TestCase):
 
     @classmethod
-    def setUp(cls):
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            username='reviewuser',
+            password='1234',
+            email='review@mail.ru',
+        )
+
         cls.book = Book.objects.create(
             title='Harry Potter',
             author='JK Rowling',
             price='25.00',
+        )
+
+        cls.review = Review.objects.create(
+            book=cls.book,
+            review='testreview',
+            author=cls.user,
         )
 
     def test_information(self):
@@ -18,6 +31,9 @@ class BookTest(TestCase):
         self.assertEqual(self.book.author, 'JK Rowling')
         self.assertEqual(self.book.price, '25.00')
         self.assertEqual(Book.objects.all().count(), 1)
+        self.assertIs(self.book, self.review.book)
+        self.assertIs(self.user, self.review.author)
+        self.assertEqual(self.review.review, 'testreview')
 
     def test_list_view(self):
         response = self.client.get(reverse('book_list'))
