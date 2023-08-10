@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 
-from .models import Book
+from .models import Book, Review
 
 class BookListView(LoginRequiredMixin, ListView):
     model = Book
@@ -16,6 +16,7 @@ class BookDetailView(LoginRequiredMixin, DetailView):
     context_object_name = "book"
     template_name = 'books/book_detail.html'
     login_url = 'account_login'
+    queryset = Book.objects.prefetch_related('reviews__author')
 
 class SearchResultsListView(ListView):
     model = Book
