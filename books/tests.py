@@ -46,3 +46,11 @@ class BookTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(fake_response.status_code, 200)
         self.assertTemplateUsed(response, 'books/book_detail.html')
+
+    def test_book_list_view_for_logged_in_user(self):  # new
+        self.client.login(email="reviewuser@email.com", password="testpass123")
+        response = self.client.get(reverse("book_list"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Harry Potter")
+        self.assertTemplateUsed(response, "books/book_list.html")
+
