@@ -1,4 +1,5 @@
 ---
 run:
+  command: python manage.py collectstatic --noinput
   persistenceMount: /data
   containerPort: 0.0.0.0:8000
