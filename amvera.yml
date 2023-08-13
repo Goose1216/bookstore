@@ -1,4 +1,0 @@
----
-run:
-  command: python manage.py collectstatic --noinput
-  persistenceMount: /data
