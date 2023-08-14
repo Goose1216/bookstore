@@ -9,6 +9,6 @@ WORKDIR /code
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
-EXPOSE 8000
+ENTRYPOINT ['python', 'manage.py']
 
 COPY . .
