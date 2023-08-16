@@ -5,22 +5,23 @@ version: '3.9'
 services:
   web:
     build: .
-    command: gunicorn bookstore_project.wsgi -b 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
-      - 8000:8000
+      - '8000:8000'
     depends_on:
       - db
-    env_file:
-      ./.env.dev
-
-  db:
-    image: postgres:11
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
     environment:
-      - "POSTGRES_HOST_AUTH_METHOD=trust"
-
-volumes:
-  postgres_data:
+      - 'DJANGO_SECRET_KEY=django-insecure-3#!z2*9+5*4n!=#f*-nxm1=li_wjo6cx&ep3=g@zqr7f857i2$$'
+      - 'DJANGO_DEBUG=True'
+  db:
+    image: mysql:latest
+    volumes:
+      - ./data/mysql/dbb:/var/lib/mysql
+    environment:
+      - 'MYSQL_DATABASE=mydb'
+      - 'MYSQL_USER=goose'
+      - 'MYSQL_PASSWORD=12345'
+      - 'MYSQL_ROOT_PASSWORD=1234'
+      - 'MYSQL_ALLOW_EMPTY_PASSWORD=true'
