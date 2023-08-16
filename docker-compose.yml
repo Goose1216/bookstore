@@ -23,5 +23,4 @@ services:
       - 'MYSQL_DATABASE=mydb'
       - 'MYSQL_USER=goose'
       - 'MYSQL_PASSWORD=12345'
-      - 'MYSQL_ROOT_PASSWORD=1234'
       - 'MYSQL_ALLOW_EMPTY_PASSWORD=true'

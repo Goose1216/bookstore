@@ -6,8 +6,7 @@ ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y --fix-missing gcc default-libmysqlclient-dev pkg-config default-mysql-client \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get install -y --fix-missing gcc default-libmysqlclient-dev pkg-config default-mysql-client
 
 WORKDIR /code
 
